@@ -596,6 +596,7 @@ class WC_Report_Sales_By_Country extends WC_Admin_Report {
                         <th><?php esc_html_e( 'Country', 'woo-sales-country-reports' ); ?></th>
                         <th><?php esc_html_e( 'Sales', 'woo-sales-country-reports' ); ?></th>
 						<th><?php esc_html_e( '# of orders', 'woo-sales-country-reports' ); ?></th>
+						<th><?php esc_html_e( 'VAT rate', 'woo-sales-country-reports' ); ?></th>
 						<th><?php esc_html_e( 'VAT amount', 'woo-sales-country-reports' ); ?></th>
 						<th><?php esc_html_e( 'Avg orders amount', 'woo-sales-country-reports' ); ?></th>
                     </tr>
@@ -613,6 +614,7 @@ class WC_Report_Sales_By_Country extends WC_Admin_Report {
                         <td><?php echo trim(preg_replace('/\s*\([^)]*\)/', '', WC()->countries->countries[ $key ])); ?></td>
                         <td><?php echo get_woocommerce_currency_symbol() . number_format(round( $value )); ?> (<?php echo round( $percentage,1 ); ?>%)</td>
 						<td style=""><?php echo $country_order_count[$key]; ?></td>	
+						<td><?php $taxRate = $this->taxClass->getTaxRate( array("country"=>$key) ); echo $this->taxClass->getRate($taxRate); ?></td>
 						<td><?php $taxRate = $this->taxClass->getTaxRate( array("country"=>$key) ); echo $this->taxClass->getTax($value, $taxRate, true); ?></td>
 						<td style="border-right: 5px solid <?php echo $color; ?>;"><?php echo round($value/$country_order_count[$key]); ?></td>				
 					</tr>

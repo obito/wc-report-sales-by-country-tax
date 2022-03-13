@@ -7,7 +7,7 @@ class WC_Report_Sales_By_Country_Tax extends WC_Tax {
 
         
         if (!isset($vat) || empty($vat)) {
-            return "None";
+            return get_woocommerce_currency_symbol() . "0";
         }
 
         if ($dollarSign) {
@@ -25,5 +25,13 @@ class WC_Report_Sales_By_Country_Tax extends WC_Tax {
         }
 
         return $taxRates;
+    }
+
+    public function getRate($rates) {
+        if (!isset($rates) || empty($rates)) {
+            return "0%";
+        }
+
+        return array_values($rates)[0]["rate"] . "%";
     }
 }
